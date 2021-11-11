@@ -1,31 +1,31 @@
 const cheerio = require('cheerio');
 const axios = require('axios');
 const websites = [
-    {
+    {//0
         name: 'petiscos',
         address: 'https://www.petiscos.com/tipo-receitas/bimby/'
     },
-    {
+    {//1
         name: 'Pingo Doce',
         address: 'https://www.pingodoce.pt/receitas/pesquisa/'
     },
-    {
+    {//2
         name: '24Kitchen',
         address: 'https://www.24kitchen.pt/receita/'
     },
-    {
+    {//3
         name: 'teleculinaria',
         address: 'https://www.teleculinaria.pt/receitas/'
     },
-    {
+    {//4
         name: 'teleculinaria',
         address: 'https://www.teleculinaria.pt/receitas/page/2/'
     },
-    {
+    {//5
         name: 'teleculinaria',
         address: 'https://www.teleculinaria.pt/receitas/page/3/'
     },
-    {
+    {//6
         name: 'teleculinaria',
         address: 'https://www.teleculinaria.pt/receitas/page/4/'
     }
@@ -123,6 +123,7 @@ exports.capture_all = (req, res) => {
 exports.capture_all_1site = (id, res) => {
     const recipes = [];
     var i = 0;
+
     if(websites[0].name === id){
         const websiteAddress = websites[0].address;
         
@@ -186,6 +187,36 @@ exports.capture_all_1site = (id, res) => {
             });
             res.json(recipes);
         });
-    };
+    }else if(websites[3].name === id){
+        const arrayGets = [];
+
+        for(let j = 3; j < 7; j++){  //criar um array com todos os url do site
+            arrayGets.push(axios.get(websites[j].address));
+        }
+
+        axios.all(arrayGets)
+        .then(axios.spread( (...responses) => {
+
+            responses.forEach( response => {
+                const html = response.data;
+                const $ = cheerio.load(html);
+                    
+                $('h3.entry-title','div.td_module_3').each(function() {          
+                    const url = $('a', this).attr('href');
+                    const title = $('a', this).text();
+                    i++;
+            
+                    recipes.push({  
+                        i,
+                        title,
+                        link: url,
+                        source: websites[3].name
+                    });
+                });
+            });
+            res.json(recipes);      
+        })).catch( errors => console.log(errors));
+
+    }
 
 };
