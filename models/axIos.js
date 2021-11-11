@@ -20,81 +20,88 @@ const websites = [
 ];
 exports.capture_all = (req, res) => {
     var recipes = [];
+    const arrayGets = [];
     const i = 0;
 
-    axios.get(websites[0].address)   //saca dados do 1 site
-        .then(response => {
-            const html = response.data;
-            const $ = cheerio.load(html);
-            var i = 0;
-            $('h4', 'div.detail', html).each(function() {
-                const title = $(this).text();
-                const url = $('a', this).attr('href');
-                i++;
+    websites.forEach( website => arrayGets.push(axios.get(website.address)) );
 
-                recipes.push({
-                    i,
-                    title,
-                    url,
-                    source: websites[0].name             
-                });     
-            });
-    
-            axios.get(websites[1].address)   //saca dados do 2 site
-            .then(response => {
-                const html = response.data;
-                const $ = cheerio.load(html);
-                $('a.recipe', html).each(function() {
-                    const title = $('div.title',this).text();
-                    const url = $(this).attr('href');
-                    i++;
-    
-                    recipes.push({
-                        i,
-                        title,
-                        url,
-                        source: websites[1].name             
-                    });     
-                });
-                const websiteAddress = websites[2].address;
-                axios.get(websiteAddress)   //saca dados do 3 site
-                .then(response => {
-                    const html = response.data;
-                    const $ = cheerio.load(html);
-                    $('div.cardBox', html).each(function() {
-                        const url = $('a', this).attr('href');
-                        const title = $('h3',this).text();
-                        i++;
+    axios.all(arrayGets)
+    .then(axios.spread( (...responses) => {
+        var i = 0; //iterator for number of recipes
         
-                        recipes.push({
-                            i,
-                            title,
-                            link: websiteAddress + title.replace(/ /g, "-"),
-                            source: websites[2].name             
-                        });     
-                    });
-                    axios.get(websites[3].address)   //saca dados do 4 site
-                    .then(response => {
-                        const html = response.data;
-                        const $ = cheerio.load(html);
-                        $('h3.entry-title','div.td_module_3').each(function() {
-                            const url = $('a', this).attr('href');
-                            const title = $('a', this).text();
-                            i++;
+        //pegando o html do website[0]
+        let html = responses[0].data;
+        let $ = cheerio.load(html);
 
-                            recipes.push({
-                                i,
-                                title,
-                                link: url,
-                                source: websites[3].name
-                            });
-                        });           
-                        res.json(recipes);
-                        res.end();
-                    });
-                });
-            });           
-        }); 
+        $('h4', 'div.detail', html).each(function() {   //pegar os dados que queremos tirando da página html
+            const title = $(this).text();
+            const url = $('a', this).attr('href');
+            i++;
+
+            recipes.push({  //adidionar no array de receitas
+                i,
+                title,
+                url,
+                source: websites[0].name             
+            });     
+        });
+
+        //pegando o html do website[1]
+        html = responses[1].data;
+        $ = cheerio.load(html);
+        
+        $('a.recipe', html).each(function() {          //pegar os dados que queremos tirando da página html
+            const title = $('div.title',this).text();
+            const url = $(this).attr('href');
+            i++;
+
+            recipes.push({  //adidionar no array de receitas   
+                i,
+                title,
+                url,
+                source: websites[1].name             
+            });     
+        });        
+
+        //pegando o html do website[2]
+        html = responses[2].data;
+        $ = cheerio.load(html);
+
+        $('div.cardBox', html).each(function() {          //pegar os dados que queremos tirando da página html
+            const url = $('a', this).attr('href');
+            const title = $('h3',this).text();
+            i++;
+
+            recipes.push({  //adidionar no array de receitas   
+                i,
+                title,
+                link: websites[2].address + title.replace(/ /g, "-"),
+                source: websites[2].name             
+            });     
+        });
+
+        //pegando o html do website[3]
+        html = responses[3].data;
+        $ = cheerio.load(html);
+        
+        $('h3.entry-title','div.td_module_3').each(function() {          //pegar os dados que queremos tirando da página html
+            const url = $('a', this).attr('href');
+            const title = $('a', this).text();
+            i++;
+
+            recipes.push({  //adidionar no array de receitas 
+                i,
+                title,
+                link: url,
+                source: websites[3].name
+            });
+        });           
+        console.log(recipes);
+        res.json(recipes);
+
+    })).catch( errors => console.log(errors));
+
+
 };
 
 exports.capture_key_oneSite = (params, res) => {
