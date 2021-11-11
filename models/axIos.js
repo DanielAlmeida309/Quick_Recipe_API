@@ -92,22 +92,25 @@ exports.capture_all = (req, res) => {
             });     
         });
 
-        //pegando o html do website[3]
-        html = responses[3].data;
-        $ = cheerio.load(html);
+        //pegando o html das paginas do website[3]
+        for(let j = 3; j < 7; j++){
+            html = responses[j].data;
+            $ = cheerio.load(html);
+            
+            $('h3.entry-title','div.td_module_3').each(function() {          //pegar os dados que queremos tirando da página html
+                const url = $('a', this).attr('href');
+                const title = $('a', this).text();
+                i++;
+    
+                recipes.push({  //adidionar no array de receitas 
+                    i,
+                    title,
+                    link: url,
+                    source: websites[j].name
+                });
+            });   
+        }
         
-        $('h3.entry-title','div.td_module_3').each(function() {          //pegar os dados que queremos tirando da página html
-            const url = $('a', this).attr('href');
-            const title = $('a', this).text();
-            i++;
-
-            recipes.push({  //adidionar no array de receitas 
-                i,
-                title,
-                link: url,
-                source: websites[3].name
-            });
-        });           
         console.log(recipes);
         res.json(recipes);
 
