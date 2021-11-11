@@ -271,35 +271,3 @@ exports.capture_all_1site = (id, res) => {
     };
 
 };
-
-
-
-
-//loop sites
-
-/*    const recipes = [];
-    websites.forEach(website => {
-        axios.get(website.address)
-            .then(response => {
-                const html = response.data;
-                const $ = cheerio.load(html);
-                var i = 0;
-                $('h4', 'div.detail', html).each(function() {
-                    const title = $(this).text();
-                    const url = $('a', this).attr('href');
-                    i++;
-
-                    recipes.push({
-                        i,
-                        title,
-                        url,
-                        source: website.name             
-                    });     
-                });
-                console.log(recipes);
-            });
-            console.log(recipes);
-    });
-    console.log(recipes);
-    res.json(recipes);
-*/
