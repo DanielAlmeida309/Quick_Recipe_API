@@ -16,7 +16,19 @@ const websites = [
     {
         name: 'teleculinaria',
         address: 'https://www.teleculinaria.pt/receitas/'
-    }  
+    },
+    {
+        name: 'teleculinaria',
+        address: 'https://www.teleculinaria.pt/receitas/page/2/'
+    },
+    {
+        name: 'teleculinaria',
+        address: 'https://www.teleculinaria.pt/receitas/page/3/'
+    },
+    {
+        name: 'teleculinaria',
+        address: 'https://www.teleculinaria.pt/receitas/page/4/'
+    }
 ];
 exports.capture_all = (req, res) => {
     var recipes = [];
