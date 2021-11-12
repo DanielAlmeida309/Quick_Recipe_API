@@ -25,6 +25,6 @@ exports.findKey = (req, res) => {
     const site = req.params.id;//.substr(1);  faz substring a partir do segundo carater
     const key = req.params.key;
     console.log("Key: " + key);
-    //axios.capture_key_oneSite([site,key], res);
-    test.capture_key(key, res);
+    axios.capture_key(key, res);
+    //test.capture_key(key, res);
 };

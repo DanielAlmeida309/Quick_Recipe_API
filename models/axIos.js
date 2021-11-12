@@ -31,9 +31,8 @@ const websites = [
     }
 ];
 exports.capture_all = (req, res) => {
-    var recipes = [];
+    const recipes = [];
     const arrayGets = [];
-    const i = 0;
 
     websites.forEach( website => arrayGets.push(axios.get(website.address)) );
 
@@ -81,13 +80,13 @@ exports.capture_all = (req, res) => {
 
         $('div.cardBox', html).each(function() {          //pegar os dados que queremos tirando da página html
             const url = $('a', this).attr('href');
-            const title = $('h3',this).text();
+            const title = $('a',this).attr('title');
             i++;
 
             recipes.push({  //adidionar no array de receitas   
                 i,
                 title,
-                link: websites[2].address + title.replace(/ /g, "-"),
+                link: websites[2].address + url.substr(1),
                 source: websites[2].name             
             });     
         });
@@ -173,15 +172,15 @@ exports.capture_all_1site = (id, res) => {
         .then(response => {
             const html = response.data;
             const $ = cheerio.load(html);
-            $('div.cardBox', html).each(function() {
+            $('div.cardBox', html).each(function() {          //pegar os dados que queremos tirando da página html
                 const url = $('a', this).attr('href');
-                const title = $('h3',this).text();
+                const title = $('a',this).attr('title');
                 i++;
-
-                recipes.push({
+    
+                recipes.push({  //adidionar no array de receitas   
                     i,
                     title,
-                    link: websiteAddress + title.replace(/ /g, "-"),
+                    link: websites[2].address + url.substr(1),
                     source: websites[2].name             
                 });     
             });
@@ -220,3 +219,139 @@ exports.capture_all_1site = (id, res) => {
     }
 
 };
+
+exports.capture_key = (params, res) => {
+    const key = params;
+    const recipes = [];
+    const arrayGets = [];
+
+    //pega em todos os links de receitas
+    websites.forEach( website => arrayGets.push(axios.get(website.address)) );
+
+    axios.all(arrayGets)
+    .then(axios.spread( (...responses) => {
+        var i = 0; //iterator for number of recipes
+        
+        //pegando o html do website[0]
+        let html = responses[0].data;
+        let $ = cheerio.load(html);
+
+        $('h4', 'div.detail', html).each(function() {   //pegar os dados que queremos tirando da página html
+            const title = $(this).text();
+            const url = $('a', this).attr('href');
+            i++;
+
+            recipes.push({  //adidionar no array de receitas
+                i,
+                title,
+                link: url,
+                source: websites[0].name             
+            });     
+        });
+
+        //pegando o html do website[1]
+        html = responses[1].data;
+        $ = cheerio.load(html);
+        
+        $('a.recipe', html).each(function() {          //pegar os dados que queremos tirando da página html
+            const title = $('div.title',this).text();
+            const url = $(this).attr('href');
+            i++;
+
+            recipes.push({  //adidionar no array de receitas   
+                i,
+                title,
+                link: url,
+                source: websites[1].name             
+            });     
+        });        
+
+        //pegando o html do website[2]
+        html = responses[2].data;
+        $ = cheerio.load(html);
+
+        $('div.cardBox', html).each(function() {          //pegar os dados que queremos tirando da página html
+            const url = $('a', this).attr('href');
+            const title = $('a',this).attr('title');
+            i++;
+
+            recipes.push({  //adidionar no array de receitas   
+                i,
+                title,
+                link: websites[2].address + url.substr(1),
+                source: websites[2].name             
+            });     
+        });
+
+        //pegando o html das paginas do website[3]
+        for(let j = 3; j < 7; j++){
+            html = responses[j].data;
+            $ = cheerio.load(html);
+            
+            $('h3.entry-title','div.td_module_3').each(function() {          //pegar os dados que queremos tirando da página html
+                const url = $('a', this).attr('href');
+                const title = $('a', this).text();
+                i++;
+    
+                recipes.push({  //adidionar no array de receitas 
+                    i,
+                    title,
+                    link: url,
+                    source: websites[j].name
+                });
+            });   
+        }
+
+        const recipes_with_key = [];  
+    
+        //criar um vetor com todos os urls das receitas
+        const getRecipes = [];
+        recipes.forEach( infoRecipe => getRecipes.push( axios.get( infoRecipe.link ) ));
+
+        //vai buscar o html de todas as páginas
+        axios.all(getRecipes)
+        .then(axios.spread( (...responses) => {
+            
+            //verificar de qual site é a pagina da receita
+            for(let j = 0; j < recipes.length; j++){
+
+                if(recipes[j].source === "Pingo Doce"){ //
+
+                    const html = responses[j].data;
+                    const $ = cheerio.load(html);
+                    $('.ingredient', '.recipe-content').each(function() {
+                        const description = $('div.description', this).text();
+                        if(description.concat(" ").search(key.concat(" ")) != -1){ //agora vai verificar se tem o ingrediente inserido na key 
+                            recipes_with_key.push({
+                                title: recipes[j].title,
+                                link: recipes[j].link,
+                                key: key
+                            })
+                        }
+                    });   
+
+                }else if(recipes[j].source === "teleculinaria"){
+
+                    const html = responses[j].data;
+                    const $ = cheerio.load(html);
+                    $('span.wprm-recipe-ingredient-name', '.wprm-recipe-ingredient-group').each(function() {
+                        const description = $('a', this).text();
+                        if(description.concat(" ").search(key.concat(" ")) != -1){ //agora vai verificar se tem o ingrediente inserido na key 
+                            recipes_with_key.push({
+                                title: recipes[j].title,
+                                link: recipes[j].link,
+                                key: key
+                            })
+                        }
+                    });   
+
+                }
+            }
+
+            res.json(recipes_with_key);
+        })).catch( errors => console.log(errors.message));
+
+    })).catch( errors => console.log(errors));
+
+
+}
