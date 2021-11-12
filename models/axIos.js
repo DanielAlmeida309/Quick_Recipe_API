@@ -15,26 +15,21 @@ const websites = [
     },
     {//3
         name: 'teleculinaria',
-        address: 'https://www.teleculinaria.pt/receitas/'
-    },
-    {//4
-        name: 'teleculinaria',
-        address: 'https://www.teleculinaria.pt/receitas/page/2/'
-    },
-    {//5
-        name: 'teleculinaria',
-        address: 'https://www.teleculinaria.pt/receitas/page/3/'
-    },
-    {//6
-        name: 'teleculinaria',
-        address: 'https://www.teleculinaria.pt/receitas/page/4/'
+        address: 'https://www.teleculinaria.pt/receitas/',
+        num_pages: '4'
     }
 ];
 exports.capture_all = (req, res) => {
     const recipes = [];
     const arrayGets = [];
 
-    websites.forEach( website => arrayGets.push(axios.get(website.address)) );
+    websites.forEach( website => {   //criar array de gets
+        if(website.name === 'teleculinaria')
+            for(let i = 1; i <= website.num_pages; i++)
+                arrayGets.push(axios.get(website.address.concat(`page/${i}/`)));
+        else
+            arrayGets.push(axios.get(website.address));
+    });
 
     axios.all(arrayGets)
     .then(axios.spread( (...responses) => {
@@ -92,8 +87,8 @@ exports.capture_all = (req, res) => {
         });
 
         //pegando o html das paginas do website[3]
-        for(let j = 3; j < 7; j++){
-            html = responses[j].data;
+        for(let j = 0; j < websites[3].num_pages; j++){
+            html = responses[3 + j].data;
             $ = cheerio.load(html);
             
             $('h3.entry-title','div.td_module_3').each(function() {          //pegar os dados que queremos tirando da página html
@@ -105,7 +100,7 @@ exports.capture_all = (req, res) => {
                     i,
                     title,
                     link: url,
-                    source: websites[j].name
+                    source: websites[3].name
                 });
             });   
         }
@@ -189,8 +184,8 @@ exports.capture_all_1site = (id, res) => {
     }else if(websites[3].name === id){
         const arrayGets = [];
 
-        for(let j = 3; j < 7; j++){  //criar um array com todos os url do site
-            arrayGets.push(axios.get(websites[j].address));
+        for(let j = 1; j <= websites[3].num_pages; j++){  //criar um array com todos os url do site
+            arrayGets.push(axios.get(websites[3].address.concat(`page/${j}/`)));
         }
 
         axios.all(arrayGets)
@@ -225,8 +220,14 @@ exports.capture_key = (params, res) => {
     const recipes = [];
     const arrayGets = [];
 
-    //pega em todos os links de receitas
-    websites.forEach( website => arrayGets.push(axios.get(website.address)) );
+    //pega em todos os links dos sites
+    websites.forEach( website => {   //criar array de gets
+        if(website.name === 'teleculinaria')
+            for(let i = 1; i <= website.num_pages; i++)
+                arrayGets.push(axios.get(website.address.concat(`page/${i}/`)));
+        else
+            arrayGets.push(axios.get(website.address));
+    });
 
     axios.all(arrayGets)
     .then(axios.spread( (...responses) => {
@@ -284,8 +285,8 @@ exports.capture_key = (params, res) => {
         });
 
         //pegando o html das paginas do website[3]
-        for(let j = 3; j < 7; j++){
-            html = responses[j].data;
+        for(let j = 0; j < websites[3].num_pages; j++){
+            html = responses[3 + j].data;
             $ = cheerio.load(html);
             
             $('h3.entry-title','div.td_module_3').each(function() {          //pegar os dados que queremos tirando da página html
@@ -297,7 +298,7 @@ exports.capture_key = (params, res) => {
                     i,
                     title,
                     link: url,
-                    source: websites[j].name
+                    source: websites[3].name
                 });
             });   
         }
@@ -325,6 +326,7 @@ exports.capture_key = (params, res) => {
                             recipes_with_key.push({
                                 title: recipes[j].title,
                                 link: recipes[j].link,
+                                source: recipes[j].source,
                                 key: key
                             })
                         }
@@ -340,6 +342,7 @@ exports.capture_key = (params, res) => {
                             recipes_with_key.push({
                                 title: recipes[j].title,
                                 link: recipes[j].link,
+                                source: recipes[j].source,
                                 key: key
                             })
                         }
