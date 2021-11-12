@@ -11,7 +11,7 @@ const websites = [
     },
     {//2
         name: '24Kitchen',
-        address: 'https://www.24kitchen.pt/receita/'
+        address: 'https://www.24kitchen.pt/receita/' //não dá para procurar por ingrediente através da página da receita pois a página que retorna é scripts
     },
     {//3
         name: 'teleculinaria',
@@ -216,7 +216,7 @@ exports.capture_all_1site = (id, res) => {
 };
 
 exports.capture_key = (params, res) => {
-    const key = params;
+    const key = params.toLowerCase().concat(" ");
     const recipes = [];
     const arrayGets = [];
 
@@ -316,13 +316,13 @@ exports.capture_key = (params, res) => {
             //verificar de qual site é a pagina da receita
             for(let j = 0; j < recipes.length; j++){
 
-                if(recipes[j].source === "Pingo Doce"){ //
+                if(recipes[j].source === "Pingo Doce"){ // Pingo Doce
 
                     const html = responses[j].data;
                     const $ = cheerio.load(html);
                     $('.ingredient', '.recipe-content').each(function() {
-                        const description = $('div.description', this).text();
-                        if(description.concat(" ").search(key.concat(" ")) != -1){ //agora vai verificar se tem o ingrediente inserido na key 
+                        const description = $('div.description', this).text().toLowerCase().concat(" ");
+                        if(description.search(key) != -1){ //agora vai verificar se tem o ingrediente inserido na key 
                             recipes_with_key.push({
                                 title: recipes[j].title,
                                 link: recipes[j].link,
@@ -332,13 +332,13 @@ exports.capture_key = (params, res) => {
                         }
                     });   
 
-                }else if(recipes[j].source === "teleculinaria"){
+                }else if(recipes[j].source === "teleculinaria"){ // Teleculinária
 
                     const html = responses[j].data;
                     const $ = cheerio.load(html);
                     $('span.wprm-recipe-ingredient-name', '.wprm-recipe-ingredient-group').each(function() {
-                        const description = $('a', this).text();
-                        if(description.concat(" ").search(key.concat(" ")) != -1){ //agora vai verificar se tem o ingrediente inserido na key 
+                        const description = $('a', this).text().toLowerCase().concat(" ");
+                        if(description.search(key) != -1){ //agora vai verificar se tem o ingrediente inserido na key 
                             recipes_with_key.push({
                                 title: recipes[j].title,
                                 link: recipes[j].link,
@@ -347,6 +347,22 @@ exports.capture_key = (params, res) => {
                             })
                         }
                     });   
+
+                }else if(recipes[j].source === "petiscos"){  // Petiscos
+
+                    const html = responses[j].data;
+                    const $ = cheerio.load(html);
+                    $('.ingre-single', '.ingre-lists').each(function() {
+                        const description = $('span.text', this).text().toLowerCase().concat(" ");
+                        if(description.search(key) != -1){ //agora vai verificar se tem o ingrediente inserido na key 
+                            recipes_with_key.push({
+                                title: recipes[j].title,
+                                link: recipes[j].link,
+                                source: recipes[j].source,
+                                key: key
+                            })
+                        }
+                    });  
 
                 }
             }
@@ -354,7 +370,7 @@ exports.capture_key = (params, res) => {
             res.json(recipes_with_key);
         })).catch( errors => console.log(errors.message));
 
-    })).catch( errors => console.log(errors));
+    })).catch( errors => console.log(errors.message));
 
 
 }
