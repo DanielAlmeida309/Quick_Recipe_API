@@ -28,18 +28,30 @@ Para melhor visualizar o resultado do API, aconselho a instalar uma extensão no
 # Funcionalidades
 
  - Todas as Receitas
-    Irá receber todas as receitas de todos os sites através de um ficheiro json.
-    -url: localhost:8000/recipes
+
+        Irá receber todas as receitas de todos os sites através de um ficheiro json.
+        ```
+        Url: localhost:8000/recipes
+        ```
 
  - Todas as Receitas de 1 site
-    Irá receber todas as receitas do site passado como parâmetro através de um ficheiro json.
-    Nomes dos sites disponíveis: Pingo Doce, teleculinaria, 24Kitchen, petiscos
-    Url: localhost:8000/recipes/(nome do site)
+
+        Irá receber todas as receitas do site passado como parâmetro através de um ficheiro json.
+        Nomes dos sites disponíveis: Pingo Doce, teleculinaria, 24Kitchen, petiscos
+        ```
+        Url: localhost:8000/recipes/(nome do site)
+        ```
 
  - Receitas com 1 Ingrediente Específico
-    Irá receber todas as receitas com o ingrediente passado como parâmetro de todos os sites através de um ficheiro json.
-    Url: localhost:8000/recipes/key/(nome do ingrediente)
+        
+        Irá receber todas as receitas com o ingrediente passado como parâmetro de todos os sites através de um ficheiro json.
+        ```
+        Url: localhost:8000/recipes/key/(nome do ingrediente)
+        ```
 
  - Receitas com 2 Ingredientes Específicos
-    Irá receber todas as receitas com os 2 ingredientes passados como parâmetro de todos os sites através de um ficheiro json.
-    Url: localhost:8000/recipes/key/(nome do ingrediente)/key2/(nome do ingrediente2)
+        
+        Irá receber todas as receitas com os 2 ingredientes passados como parâmetro de todos os sites através de um ficheiro json.
+        ```
+        Url: localhost:8000/recipes/key/(nome do ingrediente)/key2/(nome do ingrediente2)
+        ```
