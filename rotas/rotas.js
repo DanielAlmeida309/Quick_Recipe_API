@@ -15,5 +15,9 @@ module.exports = app => {
     // Envia receitas com um determinado ingrediente de todos os sites
     router.get("/recipes/key/:key", controlador.findKey);
 
+    // Envia receitas com dois ingrediente de todos os sites
+    router.get("/recipes/key/:key/key2/:key2", controlador.find2Keys);
+
+
     app.use('/', router);
 };

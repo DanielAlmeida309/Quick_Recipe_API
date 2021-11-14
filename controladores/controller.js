@@ -21,10 +21,17 @@ exports.findAll_oneSite = (req, res) => {
 
 // Envia receitas com um determinado ingrediente de todos os sites
 exports.findKey = (req, res) => {
-    console.log("Find key");
-    const site = req.params.id;//.substr(1);  faz substring a partir do segundo carater
+    console.log("Find Key");
     const key = req.params.key;
     console.log("Key: " + key);
     axios.capture_key(key, res);
     //test.capture_key(key, res);
+};
+
+exports.find2Keys = (req, res) => {
+    console.log("Find 2 Keys");
+    const key = req.params.key;
+    const key2 = req.params.key2;
+    console.log("Key: ", key, "\nKey2: ", key2);
+    axios.capture_2keys([key, key2], res);
 };
