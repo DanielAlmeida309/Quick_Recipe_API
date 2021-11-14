@@ -30,6 +30,7 @@ Para melhor visualizar o resultado do API, aconselho a instalar uma extensão no
  - Todas as Receitas
 
         Irá receber todas as receitas de todos os sites através de um ficheiro json.
+
         ```
         Url: localhost:8000/recipes
         ```
@@ -38,6 +39,7 @@ Para melhor visualizar o resultado do API, aconselho a instalar uma extensão no
 
         Irá receber todas as receitas do site passado como parâmetro através de um ficheiro json.
         Nomes dos sites disponíveis: Pingo Doce, teleculinaria, 24Kitchen, petiscos
+
         ```
         Url: localhost:8000/recipes/(nome do site)
         ```
@@ -45,6 +47,7 @@ Para melhor visualizar o resultado do API, aconselho a instalar uma extensão no
  - Receitas com 1 Ingrediente Específico
         
         Irá receber todas as receitas com o ingrediente passado como parâmetro de todos os sites através de um ficheiro json.
+
         ```
         Url: localhost:8000/recipes/key/(nome do ingrediente)
         ```
@@ -52,6 +55,7 @@ Para melhor visualizar o resultado do API, aconselho a instalar uma extensão no
  - Receitas com 2 Ingredientes Específicos
         
         Irá receber todas as receitas com os 2 ingredientes passados como parâmetro de todos os sites através de um ficheiro json.
+        
         ```
         Url: localhost:8000/recipes/key/(nome do ingrediente)/key2/(nome do ingrediente2)
         ```
