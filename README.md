@@ -31,9 +31,8 @@ Para melhor visualizar o resultado do API, aconselho a instalar uma extensão no
 
         Irá receber todas as receitas de todos os sites através de um ficheiro json.
 
-        ```
         Url: localhost:8000/recipes
-        ```
+
 
  - Todas as Receitas de 1 site
 
@@ -55,7 +54,7 @@ Para melhor visualizar o resultado do API, aconselho a instalar uma extensão no
  - Receitas com 2 Ingredientes Específicos
         
         Irá receber todas as receitas com os 2 ingredientes passados como parâmetro de todos os sites através de um ficheiro json.
-        
+
         ```
         Url: localhost:8000/recipes/key/(nome do ingrediente)/key2/(nome do ingrediente2)
         ```
