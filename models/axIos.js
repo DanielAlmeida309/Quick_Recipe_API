@@ -74,14 +74,14 @@ exports.capture_all = (req, res) => {
         $ = cheerio.load(html);
 
         $('div.cardBox', html).each(function() {          //pegar os dados que queremos tirando da página html
-            const url = $('a', this).attr('href');
-            const title = $('a',this).attr('title');
+            const url = $('a.label', this).attr('href');
+            const title = $('h3', 'a', this).text();
             i++;
 
             recipes.push({  //adidionar no array de receitas   
                 i,
                 title,
-                link: websites[2].address + url.substr(1),
+                link: websites[2].address + url.substr(9),
                 source: websites[2].name             
             });     
         });
@@ -167,14 +167,14 @@ exports.capture_all_1site = (id, res) => {
             const html = response.data;
             const $ = cheerio.load(html);
             $('div.cardBox', html).each(function() {          //pegar os dados que queremos tirando da página html
-                const url = $('a', this).attr('href');
-                const title = $('a',this).attr('title');
+                const url = $('a.label', this).attr('href');
+                const title = $('h3', 'a', this).text();
                 i++;
     
                 recipes.push({  //adidionar no array de receitas   
                     i,
                     title,
-                    link: websites[2].address + url.substr(1),
+                    link: websites[2].address + url.substr(9),
                     source: websites[2].name             
                 });     
             });
@@ -265,23 +265,6 @@ exports.capture_key = (params, res) => {
                 source: websites[1].name             
             });     
         });        
-
-        //pegando o html do website[2]
-        html = responses[2].data;
-        $ = cheerio.load(html);
-
-        $('div.cardBox', html).each(function() {          //pegar os dados que queremos tirando da página html
-            const url = $('a', this).attr('href');
-            const title = $('a',this).attr('title');
-            i++;
-
-            recipes.push({  //adidionar no array de receitas   
-                i,
-                title,
-                link: websites[2].address + url.substr(1),
-                source: websites[2].name             
-            });     
-        });
 
         //pegando o html das paginas do website[3]
         for(let j = 0; j < websites[3].num_pages; j++){

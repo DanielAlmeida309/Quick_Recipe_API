@@ -1,5 +1,5 @@
 const axios = require("../models/axIos");
-const test = require("../models/testes");
+//const test = require("../models/testes");
 
 // Mensagem default
 exports.default = (req, res) => {
