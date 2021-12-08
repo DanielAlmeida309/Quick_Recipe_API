@@ -1,11 +1,12 @@
 const axios = require("../models/axIos");
 //const test = require("../models/testes");
 
-// Mensagem default
+/* Mensagem default
 exports.default = (req, res) => {
     console.log("Message Default!");
     res.json('Welcome to my Quick Recipes API');
 };
+*/
 
 // Envia todas as receitas de todos os sites
 exports.findAll = (req, res) => {

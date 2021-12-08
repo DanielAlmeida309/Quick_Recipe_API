@@ -3,8 +3,9 @@ module.exports = app => {
 
     var router = require("express").Router();
 
-    // Mensagem default
+    /* Mensagem default
     router.get("/", controlador.default);
+    */
 
     // Envia todas as receitas de todos os sites
     router.get("/recipes", controlador.findAll);
@@ -19,5 +20,5 @@ module.exports = app => {
     router.get("/recipes/key/:key/key2/:key2", controlador.find2Keys);
 
 
-    app.use('/', router);
+    app.use('/api', router);
 };
