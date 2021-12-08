@@ -39,16 +39,18 @@ exports.capture_all = (req, res) => {
         let html = responses[0].data;
         let $ = cheerio.load(html);
 
-        $('h4', 'div.detail', html).each(function() {   //pegar os dados que queremos tirando da página html
-            const title = $(this).text();
-            const url = $('a', this).attr('href');
+        $('div.listing-wrapper', 'div.listing', html).each(function() {   //pegar os dados que queremos tirando da página html
+            const urlPhoto = $('img', this).attr('src');
+            const title = $('h4', this).text();
+            const url = $('a', 'h4', this).attr('href');
             i++;
 
             recipes.push({  //adidionar no array de receitas
                 i,
                 title,
                 url,
-                source: websites[0].name             
+                source: websites[0].name,
+                urlPhoto: urlPhoto            
             });     
         });
 
@@ -57,6 +59,7 @@ exports.capture_all = (req, res) => {
         $ = cheerio.load(html);
         
         $('a.recipe', html).each(function() {          //pegar os dados que queremos tirando da página html
+            const urlPhoto = $('img', this).attr('src');
             const title = $('div.title',this).text();
             const url = $(this).attr('href');
             i++;
@@ -65,7 +68,8 @@ exports.capture_all = (req, res) => {
                 i,
                 title,
                 url,
-                source: websites[1].name             
+                source: websites[1].name,
+                urlPhoto: urlPhoto    
             });     
         });        
 
@@ -74,6 +78,7 @@ exports.capture_all = (req, res) => {
         $ = cheerio.load(html);
 
         $('div.cardBox', html).each(function() {          //pegar os dados que queremos tirando da página html
+            const urlPhoto = $('source', this).attr('data-srcset');
             const url = $('a.label', this).attr('href');
             const title = $('h3', 'a', this).text();
             i++;
@@ -82,7 +87,8 @@ exports.capture_all = (req, res) => {
                 i,
                 title,
                 link: websites[2].address + url.substr(9),
-                source: websites[2].name             
+                source: websites[2].name,
+                urlPhoto: "https:" + urlPhoto        
             });     
         });
 
@@ -91,16 +97,18 @@ exports.capture_all = (req, res) => {
             html = responses[3 + j].data;
             $ = cheerio.load(html);
             
-            $('h3.entry-title','div.td_module_3').each(function() {          //pegar os dados que queremos tirando da página html
-                const url = $('a', this).attr('href');
-                const title = $('a', this).text();
+            $('div.td_module_3').each(function() {          //pegar os dados que queremos tirando da página html
+                const urlPhoto = $('img', this).attr('data-src');
+                const url = $('a', 'h3.entry-title',this).attr('href');
+                const title = $('a', 'h3.entry-title', this).text();
                 i++;
     
                 recipes.push({  //adidionar no array de receitas 
                     i,
                     title,
                     link: url,
-                    source: websites[3].name
+                    source: websites[3].name,
+                    urlPhoto: urlPhoto
                 });
             });   
         }
@@ -541,3 +549,4 @@ exports.capture_2keys = (params, res) => {
 
 
 };
+

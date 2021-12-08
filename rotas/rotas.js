@@ -20,5 +20,5 @@ module.exports = app => {
     router.get("/recipes/key/:key/key2/:key2", controlador.find2Keys);
 
 
-    app.use('/api', router);
+    app.use('/', router);
 };
