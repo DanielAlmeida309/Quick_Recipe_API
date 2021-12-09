@@ -72,7 +72,10 @@ section #homepage{
 }
 
 .card-recipes{
-    margin: 0.5em 0em;
+    margin: 2em;
     
+}
+.backSection{
+    background-color: rgba(133, 255, 133, 0.438);
 }
 

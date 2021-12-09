@@ -18,7 +18,7 @@
     <title>Quick Recipes API</title>
 </head>
 <body>
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom" style="background-color: rgba(98, 245, 98, 0.336);">
       <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
       </a>
@@ -45,173 +45,33 @@
         </div>
       </section>
       <section id="s1">
-        <div class="container middle">
+        <div class="container backSection">
 
-          <div id="recipes" class="row row-cols-1 row-cols-md-4 g-2">
-            <div class="col">
-              <div class="card card-recipes" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-success">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card card-recipes" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-success">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card card-recipes" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-success">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card card-recipes" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-success">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card card-recipes" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-success">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card card-recipes" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-success">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card card-recipes" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="#" class="btn btn-success">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-  
-          </div>  
-
+          <div id="AllRecipes" class="row middle row-cols-1 row-cols-md-4 g-2">
+          
+          </div>
         </div>     
       </section>
       <section id="s2">
-        <div class="container middle">
+        <div class="container backSection">
           <div class="text-center">
             <span><h2>Choose a Website:	&nbsp;</h2></span>
             <div class="btn-group b-2" role="group" aria-label="Basic outlined example">
-              <button type="button" class="btn btn-outline-success">Petiscos</button> <!--para mudar o botão para ficar ativo colocar a class "active"-->
-              <button type="button" class="btn btn-outline-success">Pingo Doce</button>
-              <button type="button" class="btn btn-outline-success">24Kitchen</button>
-              <button type="button" class="btn btn-outline-success">Teleculinaria</button>
+              <button type="button" class="btn btn-outline-success" data-website-button="petiscos">Petiscos</button> <!--para mudar o botão para ficar ativo colocar a class "active"-->
+              <button type="button" class="btn btn-outline-success" data-website-button="Pingo Doce">Pingo Doce</button>
+              <button type="button" class="btn btn-outline-success" data-website-button="24Kitchen">24Kitchen</button>
+              <button type="button" class="btn btn-outline-success" data-website-button="teleculinaria">Teleculinaria</button>
             </div>
-<br>
-            <div id="recipes" class="row row-cols-1 row-cols-md-4 g-2">
-              <div class="col">
-                <div class="card card-recipes" style="width: 18rem;">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-recipes" style="width: 18rem;">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-recipes" style="width: 18rem;">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-recipes" style="width: 18rem;">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-recipes" style="width: 18rem;">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-recipes" style="width: 18rem;">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card card-recipes" style="width: 18rem;">
-                  <img src="..." class="card-img-top" alt="...">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-success">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
+            <br>
+            <div id="recipes-1site" class="row middle row-cols-1 row-cols-md-4 g-2">
+             
   
             </div>
           </div>
         </div>
       </section>
       <section id="s3">
-        <div class="container middle">
+        <div class="container backSection">
           <div class="text-center">
             <span><h2>Ingredients:	&nbsp;</h2></span>
             <div class="row row-cols-1 row-cols-md-5 g-2">
@@ -237,7 +97,7 @@
               <div class="col"></div>
             </div>
 <br>
-            <div id="recipes" class="row row-cols-1 row-cols-md-4 g-2">
+            <div id="recipes-keys" class="row middle row-cols-1 row-cols-md-4 g-2">
 
               <div class="col">
                 <div class="card card-recipes" style="width: 18rem;">
