@@ -43,4 +43,4 @@ localhost:8000
 ![](images/Recipes.png)
 
 ##Choose Website Page- Após login, tanto tem acesso a todas as receitas e filtrar as mesmas por 1 ou 2 ingredientes. Como terá acesso há página de escolher o website, este mostrará todas as receitas retiradas do respetivo site
-![](images/website.png)
+![](images/website.PNG)
