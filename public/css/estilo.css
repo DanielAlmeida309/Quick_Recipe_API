@@ -2,6 +2,12 @@
 
 header{
     padding: 0em 1em 0em;
+    background-color: rgb(95, 2, 31);
+    position: sticky;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030
 }
 
 ul.nav li{
@@ -9,10 +15,9 @@ ul.nav li{
 }
 
 ul.nav button{
-    background-color: #ffffff;
+    background-color: rgb(197, 49, 96);
     border-radius: 100px;
-    box-shadow: rgba(255, 255, 255, 0.2) 0 -25px 18px -14px inset,rgba(255, 255, 255, 0.15) 0 1px 2px,rgba(253, 253, 253, 0.15) 0 2px 4px,rgba(255, 255, 255, 0.15) 0 4px 8px,rgba(255, 255, 255, 0.15) 0 8px 16px,rgba(255, 255, 255, 0.15) 0 16px 32px;
-    color: black;
+    color: rgb(255, 255, 255);
     cursor: pointer;
     display: inline-block;
     font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
@@ -22,26 +27,61 @@ ul.nav button{
     transition: all 250ms;
     border: 0;
     font-size: 16px;
+    font-weight: bold;
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
 }
 
 ul.nav button:hover{
-    box-shadow: rgba(255, 255, 255, 0.35) 0 -25px 18px -14px inset,rgba(255, 255, 255, 0.25) 0 1px 2px,rgba(255, 255, 255, 0.25) 0 2px 4px,rgba(255, 255, 255, 0.25) 0 4px 8px,rgba(255, 255, 255, 0.25) 0 8px 16px,rgba(255, 255, 255, 0.25) 0 16px 32px;
-    transform: scale(1.05) rotate(-1deg);
+    transform: scale(1.05) rotate(-2deg);
+    color:white;
 }
 
 ul.nav button[data-active-b]:hover{
-    box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
-    transform: scale(1.05) rotate(-1deg);
+    transform: scale(1.05) rotate(-2deg);
 }
 
 ul.nav button[data-active-b]{
-    background-color: #c2fbd7;
-    box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
-    color: green;
+    background-color: #ffffff;
+    color: rgb(197, 49, 96);
 }
+
+#btnModalRegistar, #btnLogoff{
+    background-color: rgb(197, 49, 96);
+    border-color: rgb(197, 49, 96);
+    font-weight: bold;
+}
+
+#btnModalLogin{
+    color: rgb(197, 49, 96);
+    border-color: rgb(197, 49, 96);
+    font-weight: bold;
+}
+
+#btnModalLogin:hover{
+    color: white;
+    background-color: rgb(197, 49, 96);
+}
+
+ul.nav button.disabled{
+    pointer-events: auto;
+    box-shadow: none;
+    transform: none;
+    color: #000000;
+}
+
+#btnLogoff{
+    display: none;
+}
+
+#btnModalLogin, #btnModalRegistar{
+    display: block;
+    flex-direction: row;
+}
+
+
+
 
 .middle{ 
     Display: flex;
@@ -51,7 +91,7 @@ ul.nav button[data-active-b]{
 
 section{
     display: none;
-    position:static;
+    position: static;
 }
 
 section[data-active-s]{
@@ -62,20 +102,33 @@ section #homepage span{
     padding:20%;
 }
 
-section #homepage{
+section#s0{
     background-image: url(../images/receitas.jpg);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
-    position: fixed;
-
 }
 
 .card-recipes{
-    margin: 2em;
-    
+    margin: 2em; 
+}
+.card{
+    border-width: 1em;
 }
 .backSection{
-    background-color: rgba(133, 255, 133, 0.438);
+    background-color: rgba(155, 155, 155, 0.438);
+    min-height: 15vh;
 }
 
+#AllRecipes{
+    padding-top: 5vh;
+
+}
+
+#recipes-1site{
+    padding-top: 5vh;
+}
+
+.modal-dialog{
+    top:20vh;
+}

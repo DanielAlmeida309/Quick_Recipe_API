@@ -18,37 +18,59 @@
     <title>Quick Recipes API</title>
 </head>
 <body>
-    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom" style="background-color: rgba(98, 245, 98, 0.336);">
-      <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 border-bottom">
+      <a class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none"> 
         <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-      </a>
+      </a> 
 
       <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-        <li><button type="button" class="nav-link px-2 link-dark" data-active-b data-section-button="s0">Home</button></li>
-        <li><button type="button" class="nav-link px-2 link-dark" data-section-button="s1">All Recipes</button></li>
-        <li><button type="button" class="nav-link px-2 link-dark" data-section-button="s2">Chosse The Website</button></li>
-        <li><button type="button" class="nav-link px-2 link-dark" data-section-button="s3">Ingredients</button></li>
-        <li><button type="button" class="nav-link px-2 link-dark" data-section-button="s4">How Works</button></li>
+        <li><button type="button" class="nav-link px-2 link-dark" id="homeButton" data-active-b data-section-button="s0">Home</button></li>
+        <li><button type="button" class="nav-link px-2 link-dark" id="allButton" data-section-button="s1">Recipes</button></li>
+        <li><button type="button" class="nav-link px-2 link-dark disabled" disabled id="websiteButton" data-section-button="s2" data-toggle="tooltip" data-placement="bottom" delay="0" title="Only for registered users!">Chosse The Website</button></li>
+        <!--<li><button type="button" class="nav-link px-2 link-dark" id="HWorksButton" data-section-button="s4">How Works</button></li>-->
       </ul>
 
-      <div class="col-md-3 text-end">
-        <button type="button" class="btn btn-outline-success me-2">Login</button>
-        <button type="button" class="btn btn-success">Sign-up</button>
+      <div class="col-md-3 " style="display:flex;">
+        <button type="button" class="btn btn-outline-danger me-2" id="btnModalLogin">Login</button>
+        <button type="button" class="btn btn-danger" id="btnModalRegistar">Sign-up</button>
+        <button type="button" class="btn btn-danger" id="btnLogoff" >Logoff</button>
       </div>
     </header>
 
 
     <main>
-      <section id="s0" data-active-s>
-        <div class="container-fluid middle" id="homepage" >
+      <section id="s0" data-active-s >
+        <div class="container-fluid middle" id="homepage">
           <span><h3>My </h3><h1>Quick Recipes API</h1></span>
         </div>
       </section>
       <section id="s1">
-        <div class="container backSection">
-
+        <div class="container backSection text-center">
+          <span><h2 style="padding-top: 2vh;">Ingredients:	&nbsp;</h2></span>
+          <div class="row row-cols-1 row-cols-md-5 g-2">
+            <div class="col-2"></div>
+            <div class="col">
+              <div class="form-group">
+                <input type="text" class="form-control" id="Ingredient1" placeholder="First Ingredient">
+              </div>
+            </div>
+            <div class="col"></div>
+            <div class="col">
+              <div class="form-group">
+                <input type="text" class="form-control" id="Ingredient2" placeholder="Second Ingredient (optional)">
+              </div>
+            </div>
+            <div class="col-2"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col">
+              <!--<button type="button" class="px-2 link-dark" data-section-button="s1">All Recipes</button>-->
+              <button type="button" class="btn btn-success" id="button-ingredient-search">Search</button>
+            </div>
+            <div class="col"></div>
+          </div>
           <div id="AllRecipes" class="row middle row-cols-1 row-cols-md-4 g-2">
-          
+
           </div>
         </div>     
       </section>
@@ -64,40 +86,6 @@
             </div>
             <br>
             <div id="recipes-1site" class="row middle row-cols-1 row-cols-md-4 g-2">
-             
-  
-            </div>
-          </div>
-        </div>
-      </section>
-      <section id="s3">
-        <div class="container backSection">
-          <div class="text-center">
-            <span><h2>Ingredients:	&nbsp;</h2></span>
-            <div class="row row-cols-1 row-cols-md-5 g-2">
-              <div class="col-2"></div>
-              <div class="col">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="Ingredient1" placeholder="First Ingredient">
-                </div>
-              </div>
-              <div class="col"></div>
-              <div class="col">
-                <div class="form-group">
-                  <input type="text" class="form-control" id="Ingredient2" placeholder="Second Ingredient (optional)">
-                </div>
-              </div>
-              <div class="col-2"></div>
-              <div class="col"></div>
-              <div class="col"></div>
-              <div class="col">
-                <!--<button type="button" class="px-2 link-dark" data-section-button="s1">All Recipes</button>-->
-                <button type="button" class="btn btn-success" id="button-ingredient-search">Search</button>
-              </div>
-              <div class="col"></div>
-            </div>
-<br>
-            <div id="recipes-keys" class="row middle row-cols-1 row-cols-md-4 g-2">
 
   
             </div>
@@ -111,7 +99,189 @@
       </section>
     </main>
 
+    <!-- Modal para registar novo utilizador -->
+    <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
+    <div
+      class="modal fade"
+      id="modalRegistar"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Registo de novo utilizador
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">E-Mail</label>
+              <input
+                type="email"
+                class="form-control"
+                id="usernameRegistar"
+                name="usernameRegistar"
+                placeholder="E-Mail"
+              />
+              <p id="emailErroLoginRegistar"></p>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+              <input
+                type="password"
+                class="form-control"
+                id="senhaRegistar"
+                name="senhaRegistar"
+                placeholder="Senha"
+              />
+              <p id="statusRegistar"></p>
+            </div>
+            <div class="modal-footer d-block">
+              <button class="btn btn-success float-end" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button
+                class="btn btn-outline-success float-end"
+                id="btnSubmitRegistar"
+                onclick="validaRegisto()"
+              >
+                Submeter
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para fazer login -->
+    <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
+    <div
+      class="modal fade"
+      id="modalLogin"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+      data-bs-backdrop="static"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Insira suas credenciais
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+              id="btnLoginClose"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">E-Mail</label>
+              <input
+                type="email"
+                class="form-control"
+                id="usernameLogin"
+                name="usernameLogin"
+                placeholder="E-Mail"
+              />
+              <p id="emailErroLogin"></p>
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Senha</label>
+              <input
+                type="password"
+                class="form-control"
+                id="senhaLogin"
+                name="senhaLogin"
+                placeholder="Senha"
+              />
+              <p id="passErroLogin"></p>
+              <p id="statusLogin"></p>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="rememberMe" />
+              <label class="form-check-label" for="rememberMe"
+                >Lembrar-me</label
+              >
+            </div>
+            <div class="modal-footer d-block">
+              <p class="float-start">
+                Sem conta ainda? <a href="#" onclick="tradeModal()">Registe-se</a>
+              </p>
+              <button class="btn btn-success float-end" data-bs-dismiss="modal">
+                Cancelar
+              </button>
+              <button
+                class="btn btn-outline-success float-end"
+                id="btnSubmitLogin"
+                onclick="validaLogin()"
+              >
+                Submeter
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para imformar funcionalidade com conta -->
+    <!-- se retirar o data-bs-backdrop, o modal desaparece ao clicar no fundo da página -->
+    <div
+      class="modal fade"
+      id="modalInfo"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              User Functionality
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">To have access to all recipes you will need to register on the website.</label>
+            </div>
+            <div class="modal-footer d-block">
+              <button
+                class="btn btn-outline-success float-end"
+                id="btnModalAdviseLogin"
+              >
+                Login
+              </button>
+              <button
+                class="btn btn-success float-end"
+                id="btnModalAdviseRegister"
+              >
+                Sign-Up
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script src="js/script.js"></script>
+    <script src="js/users.js"></script>
 </body>
 </html>
