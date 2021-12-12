@@ -1,11 +1,24 @@
 # Quick_Recipe_API
 
 
-Esta API foi criada com o propósito de uma pesquisa mais rápida de receitas de diversos sites. Tendo neste momento criadas 4 Funcionalidades.
-O Url da API se for inicializada na própria máquina será: localhost:8000 onde aparecerá uma mensagem Default: "Welcome to my Quick Recipes API"
+Este projeto consiste numa Web API com sistema de login e na API no back-end com o propósito de uma pesquisa mais rápida de receitas de diversos sites.
+O Url da Web API se for inicializada na própria máquina será: localhost:8000 
 
-# Pre-requisitos
-- Install [Node.js](https://nodejs.org/en/)
+# Built with
+
+## Frontend
+- [Bootstrap 5.1.3](https://getbootstrap.com/)
+- Vanilla JS
+
+## Backend
+- [Node.js](https://nodejs.org/en/)
+- [Express.js](https://expressjs.com/)
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+- [bcrypt](https://www.npmjs.com/package/bcrypt)
+- [nedb](https://www.npmjs.com/package/nedb)
+
+## Pre-requisitos
+- Instalar [Node.js](https://nodejs.org/en/)
 
 # Como começar
 - clonar o repositório
@@ -18,44 +31,16 @@ npm install
 ```
 npm run start
 ```
+- Abrir no browser
+```
+localhost:8000
+```
+# Screenshots
+##Webpage
+![](images/HomePage.png)
 
+#Recipes Page - Sem conta aparece mensagem a informar que precisa de logar para ter disponível todas as receitas, neste momento só consegue ver 15 e utilizar o filtro dos ingrediente nessas 
+![](images/Recipes.png)
 
-# Sugestão
-
-Para melhor visualizar o resultado do API, aconselho a instalar uma extensão no seu browser para conseguir visualizar melhor os dados em json. Por exemplo, a que eu utilizo no Microsoft EDGE é: PrettyJSON.
-
-
-# Funcionalidades
-
- - Todas as Receitas
-
-    Irá receber todas as receitas de todos os sites através de um ficheiro json.
-
-    ```
-    Url: localhost:8000/recipes
-    ```
-
- - Todas as Receitas de 1 site
-
-    Irá receber todas as receitas do site passado como parâmetro através de um ficheiro json.
-    Nomes dos sites disponíveis: Pingo Doce, teleculinaria, 24Kitchen, petiscos
-
-    ```
-    Url: localhost:8000/recipes/(nome do site)
-    ```
-
- - Receitas com 1 Ingrediente Específico
-        
-    Irá receber todas as receitas com o ingrediente passado como parâmetro de todos os sites através de um ficheiro json.
-
-    ```
-    Url: localhost:8000/recipes/key/(nome do ingrediente)
-     ```
-
- - Receitas com 2 Ingredientes Específicos
-        
-    Irá receber todas as receitas com os 2 ingredientes passados como parâmetro de todos os sites através de um ficheiro json.
-
-    ```
-    Url: localhost:8000/recipes/key/(nome do ingrediente)/key2/(nome do ingrediente2)
-    ```
+#Choose Website Page- Após login, tanto tem acesso a todas as receitas e filtrar as mesmas por 1 ou 2 ingredientes. Como terá acesso há página de escolher o website, este mostrará todas as receitas retiradas do respetivo site
+![](images/websie.png)
