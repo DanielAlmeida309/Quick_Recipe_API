@@ -23,10 +23,11 @@ buttonsAllR.forEach(button => {
     //colocar o data-active no novo botão
     nextButton.dataset.activeB = true;
     console.log(button.dataset.sectionButton);
-    if(button.dataset.sectionButton == "s1"){
-      console.log("feito");
+    if(button.dataset.sectionButton == "s1" & localStorage.getItem("token") == null){
       bsModalInfo.show();
       getAllRecipes();
+    }else{
+      getAllRecipes();   
     }
 
   })
