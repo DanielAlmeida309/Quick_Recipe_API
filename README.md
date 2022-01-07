@@ -39,8 +39,8 @@ localhost:8000
 ##Webpage
 ![](images/HomePage.png)
 
-#Recipes Page - Sem conta aparece mensagem a informar que precisa de logar para ter disponível todas as receitas, neste momento só consegue ver 15 e utilizar o filtro dos ingrediente nessas 
+##Recipes Page - Sem conta aparece mensagem a informar que precisa de logar para ter disponível todas as receitas, neste momento só consegue ver 15 e utilizar o filtro dos ingrediente nessas 
 ![](images/Recipes.png)
 
-#Choose Website Page- Após login, tanto tem acesso a todas as receitas e filtrar as mesmas por 1 ou 2 ingredientes. Como terá acesso há página de escolher o website, este mostrará todas as receitas retiradas do respetivo site
-![](images/websie.png)
+##Choose Website Page- Após login, tanto tem acesso a todas as receitas e filtrar as mesmas por 1 ou 2 ingredientes. Como terá acesso há página de escolher o website, este mostrará todas as receitas retiradas do respetivo site
+![](images/website.PNG)
